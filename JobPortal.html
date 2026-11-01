@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Portal</title>
+    <script>
+         function validateForm() {
+                let name = document.getElementById("name").value;
+                name= name.trim();
+                if(name===""){
+                    alert("Name must be filled out");
+                    return false;
+                }
+                let email=document.getElementById("email").value;
+                email=email.trim();
+                if(email===""){
+                    alert("Email must be filled out");
+                    return false;
+                }
+                 let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                 if (!emailPattern.test(email)) {
+
+                
+                alert("Please enter a valid email address");
+
+                
+                return false;
+            }
+          let number= document.getElementById("number").value;
+          number=number.trim();
+          if(number===""){
+            alert("Please enter your phone number");
+            return false;
+          }
+          let numberPattern= /^[0-9]{10}$/;
+          if(!numberPattern.test(number)){
+            alert("Please enter a valid 10-digit phone number");
+            return false;
+          }
+          let job= document.getElementById("jobtitle").value;
+          if(job==="" || job==="Choose a job"){
+            alert("Please select a job.");
+            return false;
+          }
+          let qualification = document.getElementById("qualification").value;
+          if(qualification===""||qualification==="Choose qualification"){
+            alert("Please select your highest qualification");
+            return false;
+          }
+          alert("Application submitted successfully!");
+          document.querySelector("form").reset();
+          return false;
+         }
+
+function applyForJob(job) {
+
+    document.getElementById("jobtitle").value = job;
+
+    document.getElementById("apply").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+function filterJobs() {
+    let category = document.getElementById("category").value;
+    let jobs = document.querySelectorAll(".inner2");
+
+    for(let i = 0; i < jobs.length; i++) {
+        let jobCategory = jobs[i].getAttribute("data-category");
+
+        if(category === "All" || category === jobCategory) {
+            jobs[i].style.display = "block";
+        }
+        else {
+            jobs[i].style.display = "none";
+        }
+    }
+}
+
+
+function showAnswer(id) {
+
+    let answer = document.getElementById(id);
+
+    if(answer.hidden === true) {
+
+        answer.hidden = false;
+
+    }
+    else {
+
+        answer.hidden = true;
+
+    }
+
+}
+function goTop() {
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+         
+
+
+
+
+
+    </script>
+    <style>
+        
+        body{
+           
+           background-color: rgb(23, 17, 100);
+           margin:0px;
+            
+        }
+        header{
+            color:aliceblue;
+            text-align: center;
+            font-size: larger;
+
+        }
+        a{
+            color:aliceblue;
+            margin: 10px;
+
+
+        }
+      
+        .quote{
+            background-color: aliceblue;
+            text-align: center;
+            border: 1px aliceblue;
+           color: rgb(69, 69, 198);
+        
+           
+        }
+        .main{
+            background-color: rgb(218, 220, 221);
+            border:1px solid aliceblue;
+        }
+        .inner{
+            background-color: aliceblue;
+            border:1px aliceblue;
+            border-radius: 10px;
+        }
+        #job{
+            color:rgb(67, 71, 201)
+        }
+        #cat{
+            font-size: x-large;
+        }
+        #category{
+            padding:20px;
+            width:750px;
+            font-size: medium;
+            border-radius: 10px;
+        }
+        #dev{
+            color:black
+        }
+        .inner2{
+            background-color: aliceblue;
+            border-radius: 10px;
+        }
+        .dev{
+            font-size: x-large;
+        }
+        p{
+            font-size: large;
+        }
+        .apply{
+            background-color: rgb(45, 45, 179);
+            color:aliceblue;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        #name{
+           padding:20px;
+            width:750px;
+            font-size: medium;
+            border-radius: 10px;  
+        }
+        #email{
+             padding:20px;
+            width:750px;
+            font-size: medium;
+            border-radius: 10px;  
+        }
+        #number{
+             padding:20px;
+            width:750px;
+            font-size: medium;
+            border-radius: 10px;  
+        }
+        #jobtitle{
+              padding:20px;
+            width:793px;
+            font-size: medium;
+            border-radius: 10px; 
+            border: 2px solid rgb(36, 28, 85)
+        }
+        #qualification{
+              padding:20px;
+            width:793px;
+            font-size: medium;
+            border-radius: 10px; 
+            border: 2px solid rgb(38, 30, 88) 
+        }
+        #topButton{
+            background-color: rgb(45, 45, 179);
+            color:aliceblue;
+            padding: 10px;
+            border-radius: 10px;
+            position: relative;
+            left:15px;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <header>
+        <h1 id="Home">
+            Job Portal
+        </h1>
+        <a href="#Home">Home</a>
+        <a href="#Jobs">Jobs</a>
+        <a href="#apply">Apply</a>
+        <a href="#FAQ">FAQ</a>
+
+
+        
+    </header>
+    <br><br>
+    <fieldset class="quote"> <h1>Find Your Dream Job</h1>
+    <p>Explore jobs and start your career today!</p></fieldset>
+     <fieldset class="main">
+<fieldset class="inner">
+    <h1 id="job">Latest Job Openings</h1>
+    
+     <label id="cat"><b>Filter by Category:</b></label>
+<br><br>
+
+<select id="category" onchange="filterJobs()">
+    <option value="All">All Jobs</option>
+    <option value="IT">IT</option>
+    <option value="Marketing">Marketing</option>
+    <option value="Data">Data</option>
+</select>
+<br><br>
+<fieldset class="inner2" id="Jobs" data-category="IT">
+    <h1 class="dev">Software Developer</h1>
+    <p>Company: TCS</p>
+     <p>Location: Bangalore</p>
+      <p>Eligibility: B.Tech / B.E</p>
+       <p>Deadline: 25 October 2026</p>
+<button type="button" class="apply" onclick="applyForJob('softwaredev')">
+Apply Now
+</button>
+</fieldset><br><br>
+<fieldset class="inner2" data-category="IT">
+    <h1 class="dev">Web Designer</h1>
+    <p>Company: INFOSYS</p>
+     <p>Location: Hyderabad</p>
+      <p>Eligibility: B.Tech / BCA</p>
+       <p>Deadline: 28 October 2026</p>
+<button type="button" class="apply" onclick="applyForJob('webdesigner')">
+Apply Now
+</button>
+</fieldset><br><br>
+<fieldset class="inner2" data-category="Marketing">
+    <h1 class="dev">Marketing Intern</h1>
+    <p>Company: HDFC Bank</p>
+     <p>Location: Mumbai</p>
+      <p>Eligibility: Any Graduate</p>
+       <p>Deadline: 30 October 2026</p>
+<button type="button" class="apply" onclick="applyForJob('marketing')">
+Apply Now
+</button>
+</fieldset>
+<br><br>
+<fieldset class="inner2" data-category="Data">
+    <h1 class="dev">Data Analyst</h1>
+    <p>Company: Wipro</p>
+     <p>Location: Pune</p>
+      <p>Eligibility: B.Tech / B.Sc.</p>
+       <p>Deadline: 30 October 2026</p>
+<button type="button" class="apply" onclick="applyForJob('dataanalyst')">
+Apply Now
+</button>
+</fieldset>
+</fieldset><br>
+<fieldset class="inner" id="apply">
+<form onsubmit="return validateForm()">
+    <h1 style="color: rgb(67, 71, 201);">Job Application Form</h1>
+    
+   <label for="name"><b style="font-size: large;">Full Name:</b></label><br><br>
+<input type="text" id="name" placeholder="Enter your name" required><br><br>
+<label for="email"><b style="font-size: large;">Email:</b></label><br><br>
+<input type="email" id="email" placeholder="Enter your email" required><br><br>
+<label for="number"><b style="font-size: large;">Phone Number:</b></label><br><br>
+<input type="tel" id="number" placeholder="Enter your number" required><br><br>
+ <label for="jobtitle"><b style="font-size: large;">Select Job:</b> </label><br><br>
+        <select id="jobtitle" required>
+            <option value="">Choose a job</option>
+            <option value="softwaredev">Software Developer</option>
+            <option value="webdesigner">Web Designer</option>
+            <option value="marketing">Marketing Intern</option>
+            <option value="dataanalyst">Data Analyst</option>
+        </select>
+<br><br>
+<label for="qualification"><b style="font-size: large;">Highest Qualification:</b></label><br><br>
+       <select id="qualification" required>
+            <option value="">Choose qualification</option>
+            <option>B.Tech</option>
+            <option>B.E.</option>
+            <option>BCA</option>
+            <option>B.Sc.</option>
+            <option>Other</option>
+        </select><br><br><br>
+        <button type="submit"  class="apply" style="font-size: medium;" value="Submit">Submit Application</button><br><br>
+        </form>
+</fieldset><br><br>
+
+<fieldset class="inner" id="FAQ">
+
+    <h1 style="color: rgb(67, 71, 201);">
+        Frequently Asked Questions
+    </h1>
+
+    <h3 onclick="showAnswer('answer1')">
+        1. How can I apply ?
+    </h3>
+
+    <p id="answer1" hidden>
+        Select a job and fill out the application form.
+    </p>
+
+    <h3 onclick="showAnswer('answer2')">
+        2. Is registration free ?
+    </h3>
+
+    <p id="answer2" hidden>
+        Yes, applying through this demo portal is free.
+    </p>
+
+    <h3 onclick="showAnswer('answer3')">
+        3. Will I get confirmation ?
+    </h3>
+
+    <p id="answer3" hidden>
+        Yes, a confirmation message appears after submission.
+    </p>
+
+</fieldset>
+<br><br>
+<button id="topButton" onclick="goTop()">
+    Back to Top 
+</button> <br><br>
+
+</fieldset>
+
+</body>
+</html>
